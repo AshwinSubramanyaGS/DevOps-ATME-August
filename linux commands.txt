@@ -1,0 +1,131 @@
+How do you navigate to the /tmp directory?
+
+How do you create a directory named practice1?
+
+How do you enter the practice1 directory?
+
+How do you create three empty files named file1.txt, file2.txt, and file3.txt?
+
+How do you create a subdirectory named archive inside practice1?
+
+How do you move file2.txt and file3.txt into the archive directory?
+
+How do you rename file1.txt to main.txt?
+
+How do you navigate into the archive directory using a relative path?
+
+How do you go back to the parent directory from inside archive?
+
+How do you delete the file main.txt and then remove the empty archive directory?
+
+
+
+
+
+
+### 🔟 **Bash Navigation & File Manipulation Exercises**
+
+---
+
+#### **1. Navigate to a Directory**
+
+* **Task:** Go to the `/tmp` directory.
+
+```bash
+cd /tmp
+```
+
+---
+
+#### **2. Create a New Directory**
+
+* **Task:** Create a directory named `practice1`.
+
+```bash
+mkdir practice1
+```
+
+---
+
+#### **3. Enter the New Directory**
+
+* **Task:** Change into the `practice1` directory.
+
+```bash
+cd practice1
+```
+
+---
+
+#### **4. Create Multiple Files**
+
+* **Task:** Create 3 empty files: `file1.txt`, `file2.txt`, and `file3.txt`.
+
+```bash
+touch file1.txt file2.txt file3.txt
+```
+
+---
+
+#### **5. Create a Subdirectory**
+
+* **Task:** Create a subdirectory inside `practice1` called `archive`.
+
+```bash
+mkdir archive
+```
+
+---
+
+#### **6. Move Files into the Subdirectory**
+
+* **Task:** Move `file2.txt` and `file3.txt` into the `archive` directory.
+
+```bash
+mv file2.txt file3.txt archive/
+```
+
+---
+
+#### **7. Rename a File**
+
+* **Task:** Rename `file1.txt` to `main.txt`.
+
+```bash
+mv file1.txt main.txt
+```
+
+---
+
+#### **8. Navigate Using Relative Paths**
+
+* **Task:** From within `practice1`, go into the `archive` directory using a relative path.
+
+```bash
+cd archive
+```
+
+---
+
+#### **9. Go Back to the Parent Directory**
+
+* **Task:** Navigate back to `practice1` from `archive`.
+
+```bash
+cd ..
+```
+
+---
+
+#### **10. Delete a File and Directory**
+
+* **Task:** Delete `main.txt` and then delete the empty `archive` directory.
+
+```bash
+rm main.txt
+rmdir archive
+```
+
+---
+
+Would you like these in a downloadable cheat sheet format or want me to turn them into an interactive script/test?

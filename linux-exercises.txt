@@ -1,0 +1,183 @@
+# Linux Bash Mastery Exercises with Solutions and Explanations
+
+# ----------------------
+# 🟢 Easy Exercises
+# ----------------------
+
+# 1. Create a file and write to it
+## Solution:
+echo "Linux is powerful" > notes.txt
+## Explanation: 
+# This uses echo to output text into a new file (or overwrite if it exists).
+
+# 2. Append to a file
+## Solution:
+date >> notes.txt
+## Explanation:
+# "date" prints the current date/time. The >> operator appends output to a file.
+
+# 3. List files with permissions
+## Solution:
+ls -l
+## Explanation:
+# The -l flag in ls shows detailed file info including permissions, ownership, and size.
+
+# 4. Change permissions
+## Solution:
+chmod 700 run.sh
+## Explanation:
+# chmod 700 gives the owner full permissions and no access for others.
+
+# 5. Check running processes
+## Solution:
+ps -u $USER
+## Explanation:
+# ps shows process info. -u $USER lists only processes belonging to the current user.
+
+# 6. View crontab
+## Solution:
+crontab -l
+## Explanation:
+# -l lists the current user’s cron jobs.
+
+
+# ----------------------
+# 🟡 Medium Exercises
+# ----------------------
+
+# 7. Move files by extension
+## Solution:
+mkdir -p logs
+mv *.log logs/
+## Explanation:
+# Creates a 'logs' directory if not present, then moves all .log files into it.
+
+# 8. Count lines in multiple files
+## Solution:
+wc -l *.txt
+## Explanation:
+# wc -l counts lines. This lists line counts for each .txt file in the directory.
+
+# 9. Schedule a cron job
+## Solution:
+crontab -e
+# Add this line:
+0 0 * * * /path/to/backup.sh
+## Explanation:
+# Runs backup.sh daily at midnight (00:00). Crontab format: min hour dom mon dow command
+
+# 10. Kill a specific process
+## Solution:
+pkill python
+## Explanation:
+# pkill sends a signal to processes by name. This kills all "python" processes.
+
+# 11. Find files by permissions
+## Solution:
+find /home -type f -perm -002
+## Explanation:
+# Finds files in /home with world-writable permissions.
+
+# 12. Write a basic script
+## Solution:
+cat > wordcount.sh << 'EOF'
+#!/bin/bash
+if [ -f "$1" ]; then
+    wc -w "$1"
+else
+    echo "File not found."
+fi
+EOF
+chmod +x wordcount.sh
+## Explanation:
+# A script that checks if a file exists, then prints word count. $1 is the first argument.
+
+
+# ----------------------
+# 🔴 Hard Exercises
+# ----------------------
+
+# 13. Create a log rotation script
+## Solution:
+cat > rotate_logs.sh << 'EOF'
+#!/bin/bash
+DATE=$(date +%F)
+mv access.log access-$DATE.log
+gzip access-$DATE.log
+EOF
+chmod +x rotate_logs.sh
+## Explanation:
+# Moves access.log to a date-named file and compresses it with gzip.
+
+# 14. Monitor and restart process
+## Solution:
+cat > monitor.sh << 'EOF'
+#!/bin/bash
+if ! pgrep nginx > /dev/null; then
+    echo "[Restarting nginx] $(date)" >> monitor.log
+    sudo systemctl start nginx
+fi
+EOF
+chmod +x monitor.sh
+## Explanation:
+# If nginx isn’t running, start it and log the event. Schedule it with cron every 10 seconds.
+
+# 15. Weekly cleanup with cron
+## Solution:
+crontab -e
+# Add:
+0 2 * * 0 find /tmp -name "*.tmp" -type f -mtime +7 -delete
+## Explanation:
+# Deletes .tmp files older than 7 days every Sunday at 2am.
+
+# 16. Set up custom permissions
+## Solution:
+mkdir secure_data
+chmod 700 secure_data
+## Explanation:
+# Only the owner can read/write/execute.
+
+# 17. Find and archive large files
+## Solution:
+mkdir -p /backup/logs
+find /var/log -type f -size +100M -exec mv {} /backup/logs/ \;
+cd /backup/logs && tar -czf large_logs.tar.gz * && rm -f *.log
+## Explanation:
+# Moves large log files and compresses them. Adjust extension or clean-up step if needed.
+
+# 18. User login audit
+## Solution:
+last -F | grep -i "$(date +%b\ %d)" > login_report.txt
+## Explanation:
+# Filters today’s logins (format: 'Aug 01') and saves to login_report.txt.
+
+# 19. Automate timestamped backup
+## Solution:
+cat > backup_docs.sh << 'EOF'
+#!/bin/bash
+DATE=$(date +%F-%H%M)
+mkdir -p ~/Backups/Documents-$DATE
+cp -r ~/Documents/* ~/Backups/Documents-$DATE/
+EOF
+chmod +x backup_docs.sh
+## Explanation:
+# Backs up Documents into a timestamped folder under Backups.
+
+# 20. Safe file deleter
+## Solution:
+cat > safedelete.sh << 'EOF'
+#!/bin/bash
+TRASH=~/.trash
+mkdir -p $TRASH
+for file in "$@"; do
+    mv "$file" "$TRASH/"
+    echo "[$(date)] Moved $file to $TRASH" >> $TRASH/delete.log
+done
+EOF
+chmod +x safedelete.sh
+## Explanation:
+# Moves files to a trash folder instead of deleting, and logs actions.
+
+# ----------------------
+# End of Exercises
+# ----------------------
